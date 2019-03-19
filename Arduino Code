@@ -1,0 +1,31 @@
+#include<SoftwareSerial.h>
+SoftwareSerial MySerial(10,11);
+int x,y;
+int count =0;
+float calories;
+float distance;
+void setup(){
+Myserial.begin(38400);
+}
+void loop(){
+x = analogRead(A0);
+y = analogRead(A1);
+if (x >= 430 && y <= 370)
+{
+count++;
+delay(200);
+}
+calories = count * 0.035;
+distance = count * 0.0006;
+Myserial.print(x);
+Myserial.print(",");
+Myserial.print(y);
+Myserial.print(",");
+Myserial.print(count);
+Myserial.print(",");
+Myserial.print(calories);
+Myserial.print(",");
+Myserial.print(distance);
+Myserial.print(",");
+delay(150);
+}
