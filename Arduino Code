@@ -1,31 +1,31 @@
-#include<SoftwareSerial.h>
-SoftwareSerial MySerial(10,11);
-int x,y;
-int count =0;
-float calories;
+#include<SoftwareSerial.h> 
+SoftwareSerial MySerial(10,11); //Connected to the bluetooth module 
+int x,y;                        //x reads A0 and y reads A1
+int count =0;                   //to count the steps
+float calories; 
 float distance;
 void setup(){
-Myserial.begin(38400);
+Myserial.begin(38400);          //baudrate set to 38400
 }
 void loop(){
-x = analogRead(A0);
-y = analogRead(A1);
-if (x >= 430 && y <= 370)
+x = analogRead(A0);             //x reads A0
+y = analogRead(A1);             //y reads A1
+if (x >= 430 && y <= 370)       //Accelerometer thresholds for x and y axis
 {
-count++;
+count++;                        //increment stepcount
 delay(200);
 }
-calories = count * 0.035;
-distance = count * 0.0006;
-Myserial.print(x);
-Myserial.print(",");
-Myserial.print(y);
-Myserial.print(",");
-Myserial.print(count);
-Myserial.print(",");
-Myserial.print(calories);
-Myserial.print(",");
-Myserial.print(distance);
+calories = count * 0.035;        //formula to calculate calories differs with height and weight
+distance = count * 0.0006;       //formula to calculate distance using steps 
+Myserial.print(x);               // values of x of accelerometer
+Myserial.print(",");             // serial values
+Myserial.print(y);               // values of y 
+Myserial.print(",");             // serial values of accelerometer
+Myserial.print(count);           // number of steps
+Myserial.print(",");             
+Myserial.print(calories);        //calories
+Myserial.print(","); 
+Myserial.print(distance);        //distance
 Myserial.print(",");
 delay(150);
 }
